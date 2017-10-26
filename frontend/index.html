@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+			font-family: "黑体";
+		}
+		.wrap{
+			width: 500px;
+			margin: 0 auto;
+			margin-top: 20px;
+		}
+		.name{
+			width: 100px;
+			height: 30px;
+			float: left;
+			font-size: 24px;
+			color: chocolate;
+			line-height: 30px;
+			border: solid 1px;
+			box-sizing: border-box;
+		}
+		.title{
+			width: 320px;
+			height: 30px;
+			font-size: 18px;
+			float: left;
+			line-height: 30px;
+			border: solid 1px;
+			box-sizing: border-box;
+
+		}
+		#del{
+			width: 50px;
+			height: 30px;
+			float: left;
+		}
+		#message{
+			width: 490px;
+			border: solid 2px violet;
+			margin-top: 20px;
+			overflow: hidden;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<input type="text" name="" id="word">
+		<input type="text" name="" id="word1">
+		<input type="submit" name="" id="sub">
+		<div id="message"></div>
+	</div>
+	
+</body>
+<script type="text/javascript">
+	$("#sub").click(function(){
+		var value=$("#word").val();
+		var value1=$("#word1").val();
+		$.ajax({
+			url:"http://localhost:3000",
+			type:"POST",
+			data:{name:value,title:value1},
+			success:function(e){
+				console.log(e)
+				var ko="";
+				for(var i in e){
+					var pl=e[i]
+					console.log(pl)
+					for(var i in pl){
+						ko+='<div class="name">'+pl[i].name+'</div>'+'<div class="title">'+pl[i].title+'</div>'+'<input type="button" value="删除" id="del">';
+					}
+				}
+				$("#message").html(ko)
+				for(i in pl){
+					var data=pl[i];
+					$("#del").click(function(){
+						console.log(111)
+					})
+				}
+				
+			}
+		})
+	})
+	
+</script>
+</html>
